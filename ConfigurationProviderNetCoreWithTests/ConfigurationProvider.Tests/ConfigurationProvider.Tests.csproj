@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ConfigurationProviderNetCore\ConfigurationProviderNetCore.csproj" />
+    <ProjectReference Include="..\ConfigurationProviderNetCore\ConfigurationProviderNetCoreWithTests.csproj" />
   </ItemGroup>
 
 </Project>
