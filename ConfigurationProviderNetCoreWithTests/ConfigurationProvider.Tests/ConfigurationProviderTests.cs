@@ -87,6 +87,17 @@ namespace ConfigurationProvider.Tests
 
         [TestMethod]
         [TestCategory("Class Integration Test")]
+        public void EmailTemplatesPath_WhenConfigSettingExistsButValueIsNull_ThrowsException()
+        {
+            // Arrange        
+            var configurationProvider = CreateConfigurationProvider(emailTemplatesPathKey, appSettingsValue: null);
+
+            // Act & Assert
+            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.EmailTemplatesPath, new[] { emailTemplatesPathKey, "is Missing", "value is Missing" });
+        }
+
+        [TestMethod]
+        [TestCategory("Class Integration Test")]
         public void EmailTemplatesPath_WhenConfigSettingIsMissing_ThrowsException()
         {
             // Arrange         
@@ -152,6 +163,17 @@ namespace ConfigurationProvider.Tests
 
             // Act & Assert
             Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.PaymentGatewayServiceUrl, new[] { paymentGatewayServiceUrlKey, "is White Spaces", "Required" });
+        }
+
+        [TestMethod]
+        [TestCategory("Class Integration Test")]
+        public void PaymentGatewayServiceUrl_WhenConfigSettingExistsButValueIsNull_ThrowsException()
+        {
+            // Arrange      
+            var configurationProvider = CreateConfigurationProvider(paymentGatewayServiceUrlKey, appSettingsValue: null);
+
+            // Act & Assert
+            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.PaymentGatewayServiceUrl, new[] { paymentGatewayServiceUrlKey, "is Missing", "value is Missing" });
         }
 
         [TestMethod]
