@@ -389,7 +389,7 @@ namespace ConfigurationProvider.Tests
         {
             try
             {
-                var _ = methodToExecute();
+                _ = methodToExecute();
                 Assert.Fail("We were expecting a ConfigurationSettingException to be thrown but no exception was thrown");
             }
             catch (T e)
