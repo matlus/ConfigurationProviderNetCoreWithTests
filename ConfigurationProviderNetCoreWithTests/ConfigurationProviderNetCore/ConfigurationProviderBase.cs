@@ -63,7 +63,7 @@ namespace ConfigurationProviderNetCore
         /// The Year component of the DateTime is not important. The Month and Day components however, are
         /// This property is an Optional property. if the setting does not exist this property should
         /// return
-        /// 1st October 0001 (in MM/dd/yyyy format that is, 10/01/0001) 
+        /// 1st October 0001 (in culture specific format) 
         /// A value that can not be converted to a DateTime is a problem and a
         /// <see cref="ConfigurationSettingException"/> exception will be thrown
         /// </summary>

@@ -196,7 +196,7 @@ namespace ConfigurationProvider.Tests
         {
             // Arrange
             var expectedFiscalYearStart = new DateTime(DateTime.Today.Year, 10, 1);
-            var configurationProvider = CreateConfigurationProvider(fiscalYearStartKey, expectedFiscalYearStart.ToString("MM/dd/yyyy"));
+            var configurationProvider = CreateConfigurationProvider(fiscalYearStartKey, expectedFiscalYearStart.ToShortDateString());
 
             // Act
             var actualFiscalYearStart = configurationProvider.FiscalYearStart;
@@ -273,7 +273,7 @@ namespace ConfigurationProvider.Tests
         {
             // Arrange
             var expectedNotifyOnUpload = false;
-            var configurationProvider = CreateConfigurationProvider(notifyOnUploadKey, expectedNotifyOnUpload.ToString());
+            var configurationProvider = CreateConfigurationProvider(notifyOnUploadKey, expectedNotifyOnUpload.ToString(null));
 
             // Act
             var actualNotifyOnUpload = configurationProvider.NotifyOnUpload;
@@ -377,7 +377,7 @@ namespace ConfigurationProvider.Tests
         public void DbConnectionInformation_WhenConfigSettingIsMissing_ThrowsException()
         {
             // Arrange
-            var configurationProvider = CreateConfigurationProvider(appSettingsKey: null , appSettingsValue:  null);
+            var configurationProvider = CreateConfigurationProvider(appSettingsKey: null, appSettingsValue: null);
 
             // Act & Assert
             AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.DbConnectionInformation, new[] { "is Missing", "Required" });
@@ -407,7 +407,7 @@ namespace ConfigurationProvider.Tests
 
             foreach (var part in messageParts)
             {
-                if (!exception.Message.Contains(part))
+                if (!exception.Message.Contains(part, StringComparison.OrdinalIgnoreCase))
                 {
                     exceptionMessage.Append($"{part}, ");
                     partNotContained = true;
