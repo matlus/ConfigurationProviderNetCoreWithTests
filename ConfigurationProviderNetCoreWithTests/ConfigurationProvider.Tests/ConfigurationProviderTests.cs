@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Text;
 using ConfigProvider = ConfigurationProviderNetCore.ConfigurationProvider;
 
 
@@ -68,10 +69,7 @@ namespace ConfigurationProvider.Tests
             var configurationProvider = CreateConfigurationProvider(emailTemplatesPathKey, appSettingsValue: string.Empty);
 
             // Act & Assert
-
-            ////The value of AppSettings Key: EmailTemplatesPath in the configuration file is Blank (only spaces). This setting is a Required setting
-
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.EmailTemplatesPath, new[] { emailTemplatesPathKey, "is Empty", "Required" });
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.EmailTemplatesPath, new[] { emailTemplatesPathKey, "is Empty", "Required" });
         }
 
         [TestMethod]
@@ -82,7 +80,7 @@ namespace ConfigurationProvider.Tests
             var configurationProvider = CreateConfigurationProvider(emailTemplatesPathKey, appSettingsValue: "           ");
 
             // Act & Assert
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.EmailTemplatesPath, new[] { emailTemplatesPathKey, "is White Spaces", "Required" });
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.EmailTemplatesPath, new[] { emailTemplatesPathKey, "is White Spaces", "Required" });
         }
 
         [TestMethod]
@@ -93,7 +91,7 @@ namespace ConfigurationProvider.Tests
             var configurationProvider = CreateConfigurationProvider(emailTemplatesPathKey, appSettingsValue: null);
 
             // Act & Assert
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.EmailTemplatesPath, new[] { emailTemplatesPathKey, "is Missing", "value is Missing" });
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.EmailTemplatesPath, new[] { emailTemplatesPathKey, "is Missing", "value is Missing" });
         }
 
         [TestMethod]
@@ -102,10 +100,10 @@ namespace ConfigurationProvider.Tests
         {
             // Arrange         
             var configurationProvider = CreateConfigurationProvider(appSettingsKey: null, appSettingsValue: null);
-            
+
 
             // Act & Assert
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.EmailTemplatesPath, new[] { emailTemplatesPathKey, "is Missing", "Required" });
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.EmailTemplatesPath, new[] { emailTemplatesPathKey, "is Missing", "Required" });
         }
 
         #endregion EmailTemplatesPath Tests
@@ -151,7 +149,7 @@ namespace ConfigurationProvider.Tests
             var configurationProvider = CreateConfigurationProvider(paymentGatewayServiceUrlKey, appSettingsValue: string.Empty);
 
             // Act & Assert
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.PaymentGatewayServiceUrl, new[] { paymentGatewayServiceUrlKey, "is Empty", "Required" });
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.PaymentGatewayServiceUrl, new[] { paymentGatewayServiceUrlKey, "is Empty", "Required" });
         }
 
         [TestMethod]
@@ -162,7 +160,7 @@ namespace ConfigurationProvider.Tests
             var configurationProvider = CreateConfigurationProvider(paymentGatewayServiceUrlKey, appSettingsValue: "           ");
 
             // Act & Assert
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.PaymentGatewayServiceUrl, new[] { paymentGatewayServiceUrlKey, "is White Spaces", "Required" });
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.PaymentGatewayServiceUrl, new[] { paymentGatewayServiceUrlKey, "is White Spaces", "Required" });
         }
 
         [TestMethod]
@@ -173,7 +171,7 @@ namespace ConfigurationProvider.Tests
             var configurationProvider = CreateConfigurationProvider(paymentGatewayServiceUrlKey, appSettingsValue: null);
 
             // Act & Assert
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.PaymentGatewayServiceUrl, new[] { paymentGatewayServiceUrlKey, "is Missing", "value is Missing" });
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.PaymentGatewayServiceUrl, new[] { paymentGatewayServiceUrlKey, "is Missing", "value is Missing" });
         }
 
         [TestMethod]
@@ -182,10 +180,10 @@ namespace ConfigurationProvider.Tests
         {
             // Arrange      
             var configurationProvider = CreateConfigurationProvider(appSettingsKey: null, appSettingsValue: null);
-            
+
 
             // Act & Assert
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.PaymentGatewayServiceUrl, new[] { paymentGatewayServiceUrlKey, "is Missing", "Required" });
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.PaymentGatewayServiceUrl, new[] { paymentGatewayServiceUrlKey, "is Missing", "Required" });
         }
 
         #endregion PaymentGatewayServiceUrl Tests
@@ -262,7 +260,7 @@ namespace ConfigurationProvider.Tests
             var configurationProvider = CreateConfigurationProvider(fiscalYearStartKey, badDateTime);
 
             // Act & Assert
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.FiscalYearStart, new[] { fiscalYearStartKey, "not a valid DateTime" });            
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.FiscalYearStart, new[] { fiscalYearStartKey, "not a valid DateTime" });
         }
 
         #endregion FiscalYearStart Tests
@@ -338,7 +336,7 @@ namespace ConfigurationProvider.Tests
             var configurationProvider = CreateConfigurationProvider(notifyOnUploadKey, "NotABool");
 
             // Act & Assert
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.NotifyOnUpload, new[] { "not a valid Boolean", "parseable to a Boolean" });
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.NotifyOnUpload, new[] { "not a valid Boolean", "parseable to a Boolean" });
         }
 
         #endregion NotifyOnUpload Tests
@@ -371,9 +369,8 @@ namespace ConfigurationProvider.Tests
             var configurationProvider = CreateConfigurationProvider(dbConnectionKey, appSettingsValue: null);
 
             // Act & Assert
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.DbConnectionInformation, new[] { "is Missing", "Required" });
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.DbConnectionInformation, new[] { "is Missing", "Required" });
         }
-
 
         [TestMethod]
         [TestCategory("Class Integration Test")]
@@ -383,10 +380,46 @@ namespace ConfigurationProvider.Tests
             var configurationProvider = CreateConfigurationProvider(appSettingsKey: null , appSettingsValue:  null);
 
             // Act & Assert
-            Assert.That.ThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.DbConnectionInformation, new[] { "is Missing", "Required" });
+            AssertThrowsExceptionWithSpecificWords<ConfigurationSettingException>(() => configurationProvider.DbConnectionInformation, new[] { "is Missing", "Required" });
         }
 
         #endregion DbConnectionInformation Tests
+
+        private static void AssertThrowsExceptionWithSpecificWords<T>(Func<object> methodToExecute, IEnumerable<string> messageParts) where T : Exception
+        {
+            try
+            {
+                var _ = methodToExecute();
+                Assert.Fail("We were expecting a ConfigurationSettingException to be thrown but no exception was thrown");
+            }
+            catch (T e)
+            {
+                EnsureExceptionMessageContains(e, messageParts);
+            }
+        }
+
+        private static void EnsureExceptionMessageContains(Exception exception, IEnumerable<string> messageParts)
+        {
+            var exceptionMessage = new StringBuilder();
+            exceptionMessage.AppendLine($"An Exception of Type: {exception.GetType().Name}, was thrown, however the exception message was expected to contain the following Phrases: {string.Join(", ", messageParts)}. However, the exception message did NOT contain the following:\r\n");
+
+            var partNotContained = false;
+
+            foreach (var part in messageParts)
+            {
+                if (!exception.Message.Contains(part))
+                {
+                    exceptionMessage.Append($"{part}, ");
+                    partNotContained = true;
+                }
+            }
+
+            if (partNotContained)
+            {
+                exceptionMessage.AppendLine("\r\nThe actual exception message is: " + exception.Message);
+                throw new AssertFailedException(exceptionMessage.ToString());
+            }
+        }
     }
 }
 

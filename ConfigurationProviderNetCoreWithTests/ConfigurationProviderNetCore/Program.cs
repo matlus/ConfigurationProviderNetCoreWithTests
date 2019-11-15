@@ -18,6 +18,9 @@ namespace ConfigurationProviderNetCore
             Console.WriteLine(configurationProvider.NotifyOnUpload);
 
             var dbConnectionInformation = configurationProvider.DbConnectionInformation;
+            Console.WriteLine(dbConnectionInformation.ConnectionStringName);
+            Console.WriteLine(dbConnectionInformation.ConnectionString);
+            Console.WriteLine(dbConnectionInformation.ProviderName);
         }
     }
 }
