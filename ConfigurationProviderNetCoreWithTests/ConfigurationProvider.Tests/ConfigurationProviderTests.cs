@@ -390,7 +390,7 @@ namespace ConfigurationProvider.Tests
             try
             {
                 _ = methodToExecute();
-                Assert.Fail("We were expecting a ConfigurationSettingException to be thrown but no exception was thrown");
+                Assert.Fail($"We were expecting an Exception of type: {typeof(T).Name} to be thrown but no exception was thrown. The exception message was expected to contain the following phrases: {string.Join(',', messageParts)}");
             }
             catch (T e)
             {
